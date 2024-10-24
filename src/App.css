@@ -1,38 +1,220 @@
-.App {
-  text-align: center;
+/* General Body Styling */
+body {
+  background: url('../public/bgg.gif') no-repeat center center fixed; /* Use video or GIF as background */
+  background-size: cover;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Video Background Styling */
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Keep it behind content */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Main Container */
+.app-container {
+  max-width: 1000px;
+  min-height: 70vh;
+  width: 100%;
+  margin: 20px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.15); /* Slightly more opaque for readability */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 20px;
+  color: #fff;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+  gap: 20px; /* Space between elements */
+  position: relative; /* For stacking order */
+  z-index: 1; /* Keep content above the video */
+}
+
+/* Main Heading */
+h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+}
+
+/* Input Container */
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 700px; /* Limit width for inputs */
+  align-items: center;
+}
+
+/* Task Input Field */
+input[type="text"] {
+  padding: 12px;
+  width: 60%; /* Adjust width to fit content */
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  background: rgba(255, 255, 255, 0.8); /* Slightly opaque background */
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+/* Date Picker Input */
+.date-picker {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  width: 25%; /* Adjust width to fit content */
+}
+
+/* Add Task Button */
+.add-task-btn {
+  padding: 12px 20px;
+  background-color: #4a90e2;
   color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
-.App-link {
-  color: #61dafb;
+.add-task-btn:hover {
+  background-color: #357abd;
+  transform: translateY(-3px); /* Slight lift on hover */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Task Section - Holds Pending and Completed Tasks */
+.task-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 700px;
+  gap: 40px;
+}
+
+/* Task Category (Pending or Completed) */
+.task-category {
+  flex: 1;
+  text-align: left;
+}
+
+.task-category h2 {
+  font-size: 1.8rem;
+  color: #4a90e2;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+/* Task List Styling */
+.task-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 15px; /* Ensure tasks are close to headers */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust gap between tasks */
+}
+
+/* Individual Task Item */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.task-item:hover {
+  background-color: #eaf3fb;
+  transform: scale(1.02);
+}
+
+/* Task Information */
+.task-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.task-text {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.task-deadline {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Task Actions (Buttons) */
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Complete Button */
+.complete-btn {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.complete-btn:hover {
+  background-color: #229954;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
 }
